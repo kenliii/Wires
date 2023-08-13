@@ -8,6 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import register from "./controllers/auth.js"
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
 app.use(cors());
 app.use("/assets", express.static(path.join(__dirname,'public/assets')));
 
-
+//file storage
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'public/assets');
@@ -33,6 +34,9 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage })
+
+//connect to mongodb database
+app.post("/auth/register", upload.single("picture"), register);
 
 
 //connect to mongodb database
