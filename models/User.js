@@ -19,6 +19,24 @@ const UserSchema = new mongoose.Schema(
             trim: true, // Remove whitespace from both ends
             lowercase: true, // Convert email to lowercase
             match: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, // Basic email format validation
-        }
+        },
+        password: {
+            type: String,
+            required: true,
+            minlength: 8, // Minimum password length
+            select: false, // Exclude password from default query results
+        },
+        picturePath: {
+            type: String,
+            default: "",
+        },
+        friends: {
+           type: Array,
+           default: []
+        },
+        location: String,
+        occupation: String,
+        viewdProfile: Number,
+        impressions: Number,
     }
 );
