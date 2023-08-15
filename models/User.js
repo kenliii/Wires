@@ -1,16 +1,24 @@
-import mongoose from "mongoose"
-
-const UserSchma = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
     {
         firstName: {
             type: String,
-            require: true,
+            required: true,
             min: 2,
             max: 50,
         },
         lastName: {
             type: String,
-            require: true,
+            required: true,
             min: 2,
             max: 50,
-    }),
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true, // Ensure emails are unique
+            trim: true, // Remove whitespace from both ends
+            lowercase: true, // Convert email to lowercase
+            match: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, // Basic email format validation
+        }
+    }
+);
